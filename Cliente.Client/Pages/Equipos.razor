@@ -1,0 +1,34 @@
+﻿@page "/equipos"
+@attribute [Authorize]
+
+<PageTitle>Equipos</PageTitle>
+
+<MudGrid Justify="Justify.SpaceBetween">
+    <AuthorizeView Roles="Gerente">
+        <Authorized>
+            <MudItem xs="12" Class="mt-5">
+                <MudPaper Class="pa-4 ma-4" Elevation="4">
+                    <TablaEquipos Rol="Gerente" />
+                </MudPaper>
+            </MudItem>
+        </Authorized>
+    </AuthorizeView>
+    <AuthorizeView Roles="Administrador">
+        <Authorized>
+            <MudItem xs="12" Class="mt-5">
+                <MudPaper Class="pa-4 ma-4" Elevation="4">
+                    <TablaEquipos Rol="Administrador" />
+                </MudPaper>
+            </MudItem>
+        </Authorized>
+    </AuthorizeView>
+    <AuthorizeView Roles="Representante">
+        <Authorized>
+            <MudItem xs="12" Class="mt-5">
+                <MudPaper Class="pa-4 ma-4" Elevation="4">
+                    <TablaEquipos Rol="Representante" />
+                </MudPaper>
+            </MudItem>
+        </Authorized>
+    </AuthorizeView>
+</MudGrid>

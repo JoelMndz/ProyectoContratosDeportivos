@@ -1,0 +1,95 @@
+﻿@page "/registro"
+
+<PageTitle>Registro</PageTitle>
+
+<MudGrid Justify="Justify.Center">
+    <MudItem xs="12" sm="8" md="6" Class="mt-5">
+        <MudPaper Class="pa-4 ma-4" Elevation="4">
+            <MudText Typo="Typo.h6">Datos del usuario</MudText>
+            @if (Error.Length > 0)
+            {
+                <MudAlert 
+                    Severity="Severity.Error" 
+                    ContentAlignment="HorizontalAlignment.Center" 
+                    ShowCloseIcon="true" 
+                    CloseIconClicked="(() => Error = string.Empty)">@Error</MudAlert>
+            }
+            <MudForm
+                Model="@model"
+                @ref="form"
+                @bind-IsValid="@DatosCorrectos"
+                Validation="@validator.ValidateValue"
+                ValidationDelay="0">
+
+                <MudTextField 
+                    T="string" 
+                    Label="Nombres" 
+                    @bind-Value="model.Nombres" 
+                    For="@(() => model.Nombres)"/>
+
+                <MudTextField 
+                    T="string" 
+                    Label="Apellidos" 
+                    @bind-Value="model.Apellidos" 
+                    For="@(() => model.Apellidos)"/>
+                
+                <MudTextField 
+                    T="string" 
+                    Label="Celular" 
+                    @bind-Value="model.Celular"
+                    For="@(() => model.Celular)"
+                    InputType="InputType.Telephone"/>
+
+                <MudTextField 
+                    T="string" 
+                    Label="Cédula o ruc" 
+                    @bind-Value="model.Cedula" 
+                    For="@(() => model.Cedula)"/>
+
+                <MudSelect 
+                    T="string" 
+                    Label="Rol" 
+                    @bind-Value="model.Rol"
+                    For="@(() => model.Rol)"
+                    AnchorOrigin="Origin.BottomCenter">
+
+                    <MudSelectItem Value="@("Administrador")" />
+                    <MudSelectItem Value="@("Gerente")" />
+                    <MudSelectItem Value="@("Representante")" />
+
+                </MudSelect>
+
+                <MudTextField 
+                    T="string" 
+                    Label="Email" 
+                    @bind-Value="model.Email"
+                    For="@(() => model.Email)"
+                    InputType="InputType.Email"/>
+
+                <MudTextField 
+                    T="string" 
+                    @bind-Value="model.Password"
+                    Label="Password" 
+                    InputType="InputType.Password"
+                    For="@(() => model.Password)"/>
+
+                <MudButton 
+                    Disabled="@(Enviando || !DatosCorrectos)"
+                    Class="mt-6" 
+                    Variant="Variant.Filled" 
+                    Color="Color.Primary" 
+                    OnClick="@(async () => await RegistrarUsuario())"
+                    FullWidth="true">
+                        @if (Enviando)
+                        {
+                            <MudProgressCircular Class="ms-n1" Size="Size.Small" Indeterminate="true"/>
+                            <MudText>Registrando...</MudText>
+                        }else{
+                            <MudText>Registrase</MudText>
+                        }
+                </MudButton>
+            </MudForm>
+        </MudPaper>
+    </MudItem>
+</MudGrid>
+

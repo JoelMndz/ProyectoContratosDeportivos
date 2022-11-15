@@ -1,0 +1,30 @@
+﻿@using Cliente.Shared
+
+<MudTable
+	Items="appState.UsuarioState.ListaUsuarios"
+	Hover="true" 
+	Loading="loading" 
+	LoadingProgressColor="Color.Info">
+    <ToolBarContent>
+        <MudText Typo="Typo.h6">Lista de usuarios</MudText>
+    </ToolBarContent>
+    <HeaderContent>
+        <MudTh>Nombres</MudTh>
+        <MudTh>Apellidos</MudTh>
+        <MudTh>Cédula</MudTh>
+        <MudTh>Celular</MudTh>
+        <MudTh>Email</MudTh>
+        <MudTh>Rol</MudTh>
+    </HeaderContent>
+    <RowTemplate>
+        <MudTd DataLabel="Nombres">@context.Nombres</MudTd>
+        <MudTd DataLabel="Apellidos">@context.Apellidos</MudTd>
+        <MudTd DataLabel="Cédula">@context.Cedula</MudTd>
+        <MudTd DataLabel="Celular">@context.Celular</MudTd>
+        <MudTd DataLabel="Email">@context.Email</MudTd>
+        <MudTd DataLabel="Rol">@context.Rol</MudTd>
+    </RowTemplate>
+    <PagerContent>
+        <MudTablePager PageSizeOptions="new int[]{5, 10}"/>
+    </PagerContent>
+</MudTable>

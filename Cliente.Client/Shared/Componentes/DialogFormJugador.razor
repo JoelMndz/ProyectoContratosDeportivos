@@ -1,0 +1,78 @@
+﻿<MudDialog>
+    <TitleContent>
+        <MudText Typo="Typo.h5" Align="Align.Center">
+            @Titulo
+        </MudText>
+    </TitleContent>
+    <DialogContent>
+        <MudForm
+            @ref="form"
+            Model="@model"
+            Validation="validacion.ValidateValue"
+            ValidationDelay="0">
+
+            <MudTextField 
+                T="string" 
+                Label="Nombres" 
+                For="@(() => model.Nombres)"
+                @bind-Value="model.Nombres"
+                InputType="InputType.Text"/>
+
+            <MudTextField 
+                T="string" 
+                @bind-Value="model.Apellidos"
+                Label="Apellidos" 
+                For="@(() => model.Apellidos)"
+                InputType="InputType.Text"
+                />
+
+            <MudSelect 
+                T="string" 
+                @bind-Value="model.Posicion"
+                Label="Posición" 
+                For="@(() => model.Posicion)">
+                @foreach (var item in ListaPosiciones)
+                {
+                <MudSelectItem Value="item" >@item</MudSelectItem>
+                } 
+            </MudSelect>
+
+            @if (EsAdmin)
+            {
+            <MudSelect 
+            T="string" 
+            Label="Representante" 
+            AnchorOrigin="Origin.BottomCenter"
+            @bind-Value = "model.IdRepresentante"
+            For="@(() => model.IdRepresentante)">
+                @foreach (var item in ListaRepresentantes)
+                {
+                    <MudSelectItem Value="item.Id" >@item.Nombres @item.Apellidos</MudSelectItem>
+                }           
+            </MudSelect>
+            }
+
+        </MudForm>
+    </DialogContent>
+    <DialogActions>
+        <MudButton 
+            Variant="Variant.Filled" 
+            Color="Color.Error"
+            OnClick="Cancelar">Cancelar</MudButton>
+        <MudButton 
+            Disabled="enviando"
+            Variant="Variant.Filled" 
+            Color="Color.Primary" 
+            OnClick="@(async()=>await Procesar())">
+                @if (enviando)
+                {
+                <MudProgressCircular Class="ms-n1" Size="Size.Small" Indeterminate="true"/>
+                <MudText>@(Editar ? "Actualizando...":"Ingresando...")</MudText>
+                }
+                else
+                {
+                    <MudText>@(Editar ? "Actualizar" : "Ingresar")</MudText>
+                }
+        </MudButton>
+    </DialogActions>
+</MudDialog>

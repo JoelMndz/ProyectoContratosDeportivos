@@ -1,0 +1,12 @@
+﻿@page "/usuarios"
+@attribute [Authorize(Roles = "Administrador")]
+
+<PageTitle>Usuarios</PageTitle>
+
+<MudGrid Justify="Justify.Center">
+    <MudItem xs="12" Class="mt-5">
+        <MudPaper Class="pa-4 ma-4" Elevation="4">
+            <TablaUsuarios />
+        </MudPaper>
+    </MudItem>
+</MudGrid>

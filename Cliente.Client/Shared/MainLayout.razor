@@ -1,0 +1,39 @@
+﻿@using System.Security.Claims
+@inherits LayoutComponentBase
+
+<MudThemeProvider Theme="@temarsonalizado"/>
+<MudDialogProvider/>
+<MudSnackbarProvider/>
+
+<MudLayout>
+    <MudAppBar Elevation="1">
+        <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="@(e => AlternarDrawer())"/>
+        <AuthorizeView>
+            <Authorized>
+                <MudText Typo="Typo.h5" Class="ml-3">@(context.User.Claims.First(x => x.Type == ClaimTypes.Role).Value)</MudText>
+                <MudSpacer/>
+                <MudButton Href="salir" Color="Color.Inherit" Edge="Edge.End">
+                    Salir 
+                </MudButton>
+            </Authorized>
+            <NotAuthorized>
+                <MudSpacer/>
+                <MudButton Href="login" Color="Color.Inherit" Edge="Edge.End">
+                    Login 
+                </MudButton>
+                <MudButton Href="registro" Color="Color.Inherit" Edge="Edge.End">
+                    Registrarse 
+                </MudButton>
+            </NotAuthorized>
+
+        </AuthorizeView>
+    </MudAppBar>
+    <MudDrawer @bind-Open="drawerAbierto" ClipMode="DrawerClipMode.Always" Elevation="2">
+        <NavMenu/>
+    </MudDrawer>
+    <MudMainContent>
+        @Body
+    </MudMainContent>
+</MudLayout>
+
+

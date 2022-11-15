@@ -1,0 +1,95 @@
+﻿<MudDialog>
+    <TitleContent>
+        <MudText Typo="Typo.h5" Align="Align.Center">
+            @Titulo
+        </MudText>
+    </TitleContent>
+    <DialogContent>
+        <MudForm
+            Model="@model"
+            @ref = "form"
+            Validation="validacion.ValidateValue"
+            ValidationDelay="0">
+            <MudTextField 
+                T="string" 
+                Label="Numero del jugador"
+                For="@(() => model.NumeroJugador)"
+                @bind-Value="model.NumeroJugador" 
+                InputType="InputType.Number"/>
+
+            <MudTextField 
+                T="string" 
+                Label="Precio" 
+                For="@(() => model.Precio)"
+                @bind-Value="model.Precio"
+                InputType="InputType.Number"/>
+
+            <MudTextField 
+                T="string" 
+                Label="Fecha inicio" 
+                For="@(() => model.FechaInicio)"
+                @bind-Value="model.FechaInicio"
+                InputType="InputType.Date"/>
+
+            <MudTextField 
+                T="string" 
+                Label="Fecha fin" 
+                For="@(() => model.FechaFin)"
+                @bind-Value="model.FechaFin"
+                InputType="InputType.Date"/>
+
+            <MudSelect 
+                T="string" 
+                Label="Equipo" 
+                AnchorOrigin="Origin.BottomCenter"
+                @bind-Value = "model.IdEquipo"
+                For="@(() => model.IdEquipo)">
+                @foreach (var item in appState.EquipoState.ListaEquipos)
+                {
+                <MudSelectItem Value="item.Id" >@item.Nombre</MudSelectItem>
+                }           
+            </MudSelect>
+
+
+            <MudSelect 
+                T="string" 
+                Label="Jugador" 
+                AnchorOrigin="Origin.BottomCenter"
+                @bind-Value = "model.IdJugador"
+                For="@(() => model.IdJugador)">
+                @foreach (var item in appState.JugadoreState.ListaJugadores)
+                {
+                <MudSelectItem Value="item.Id" >@item.Nombres @item.Apellidos</MudSelectItem>
+                }           
+            </MudSelect>
+
+            <MudTextField 
+                T="string" 
+                Label="Descripcion" 
+                For="@(() => model.Descripcion)"
+                @bind-Value="model.Descripcion"
+                InputType="InputType.Text"/>
+        </MudForm>
+    </DialogContent>
+    <DialogActions>
+        <MudButton 
+            Variant="Variant.Filled" 
+            Color="Color.Error"
+            OnClick="Cancelar">Cancelar</MudButton>
+        <MudButton 
+            Disabled="cargando"
+            Variant="Variant.Filled" 
+            Color="Color.Primary" 
+            OnClick="@(async ()=> await ProcesarFormulario())">
+                @if (cargando)
+                {
+                <MudProgressCircular Class="ms-n1" Size="Size.Small" Indeterminate="true"/>
+                <MudText>@(Editar ? "Actualizando...":"Ingresando...")</MudText>
+                }
+                else
+                {
+                    <MudText>@(Editar ? "Actualizar" : "Ingresar")</MudText>
+                }
+        </MudButton>
+    </DialogActions>
+</MudDialog>

@@ -1,0 +1,62 @@
+﻿<MudDialog>
+    <TitleContent>
+        <MudText Typo="Typo.h5" Align="Align.Center">
+            @Titulo
+        </MudText>
+    </TitleContent>
+    <DialogContent>
+        <MudForm
+            Model="@model"
+            @ref = "form"
+            Validation="validacion.ValidateValue"
+            ValidationDelay="0">
+            <MudTextField 
+                T="string" 
+                Label="Nombre"
+                For="@(() => model.Nombre)"
+                @bind-Value="model.Nombre" 
+                InputType="InputType.Text"/>
+
+            <MudTextField 
+                T="string" 
+                Label="Presupuesto anual" 
+                For="@(() => model.PresupuestoAnual)"
+                @bind-Value="model.PresupuestoAnual"
+                InputType="InputType.Number"/>
+
+            <MudSelect 
+                T="string" 
+                Label="Categoria" 
+                AnchorOrigin="Origin.BottomCenter"
+                @bind-Value = "model.IdCategoria"
+                For="@(() => model.IdCategoria)">
+                @foreach (var item in appState.CategoriaState.ListaCategorias)
+                {
+                    <MudSelectItem Value="item.Id" >@item.Nombre</MudSelectItem>
+                }           
+            </MudSelect>
+
+        </MudForm>
+    </DialogContent>
+    <DialogActions>
+        <MudButton 
+            Variant="Variant.Filled" 
+            Color="Color.Error"
+            OnClick="Cancelar">Cancelar</MudButton>
+        <MudButton 
+            Variant="Variant.Filled"
+            Disabled="@cargando"
+            Color="Color.Primary" 
+            OnClick="@(async ()=> await ProcesarFormulario())">
+            @if (cargando)
+            {
+                <MudProgressCircular Class="ms-n1" Size="Size.Small" Indeterminate="true"/>
+                <MudText>@(Editar ? "Actualizando..." : "Ingresando...")</MudText>
+            }
+            else
+            {
+                <MudText>@(Editar ? "Actualizar" : "Ingresar")</MudText>
+            }
+        </MudButton>
+    </DialogActions>
+</MudDialog>

@@ -1,0 +1,26 @@
+﻿<MudDialog>
+    <TitleContent>
+        <MudText Typo="Typo.h6">
+            Eliminar jugador
+        </MudText>
+    </TitleContent>
+    <DialogContent>
+        <p>
+            ¿Estas seguro de eliminar a "@($"{Jugador.Nombres} {Jugador.Apellidos}")"?
+        </p>
+    </DialogContent>
+    <DialogActions>
+        <MudButton OnClick="Cancelar">Cancelar</MudButton>
+        <MudButton Disabled="cargando" OnClick="Ok" Color="Color.Error">
+            @if (cargando)
+            {
+                <MudProgressCircular Class="ms-n1" Size="Size.Small" Indeterminate="true"/>
+                <MudText> Elimando...</MudText>
+            }
+            else
+            {
+                <MudText>Eliminar</MudText>
+            }
+        </MudButton>
+    </DialogActions>
+</MudDialog>

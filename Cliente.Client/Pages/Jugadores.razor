@@ -1,0 +1,27 @@
+﻿@page "/jugadores"
+@attribute [Authorize]
+
+<PageTitle>Jugadores</PageTitle>
+
+<MudGrid Justify="Justify.SpaceBetween">
+    <MudItem xs="12"Class="mt-5">
+        <MudPaper Class="pa-4 ma-4" Elevation="4">
+            <AuthorizeView Roles="Administrador">
+                <Authorized>
+                    <TablaJugadores Rol="Administrador" />
+                </Authorized>
+            </AuthorizeView>
+            <AuthorizeView Roles="Representante">
+                <Authorized>
+                    <TablaJugadores Rol="Representante" />
+                </Authorized>
+            </AuthorizeView>
+            <AuthorizeView Roles="Gerente">
+                <Authorized>
+                    <TablaJugadores Rol="Gerente" />
+                </Authorized>
+            </AuthorizeView>
+        </MudPaper>
+    </MudItem>
+</MudGrid>
+

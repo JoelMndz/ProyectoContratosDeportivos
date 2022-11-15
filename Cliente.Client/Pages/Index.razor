@@ -1,0 +1,22 @@
+﻿@page "/"
+
+<PageTitle>Inicio</PageTitle>
+
+<MudGrid Justify="Justify.Center">
+    <MudItem xs="12" sm="8" md="6" Class="mt-5">
+        <MudPaper Class="pa-4 ma-4" Elevation="4">
+            <MudCard>
+                <div class="d-flex justify-center">
+                    <MudImage ObjectFit="@(ObjectFit.Fill)" Height="200" Width="400" Src="https://www.fef.ec/wp-content/uploads/2019/11/logo_fef.png" Alt="Örebro Slott"  Elevation="25" Class="rounded-lg"/>
+                </div>
+                <MudCardContent>
+                    <MudText Typo="Typo.h5">Federación ecuatoriana de Fútbol</MudText>
+                    <MudText Typo="Typo.body2">Bienvenido a la aplicación de gestión de contratos deportivos</MudText>
+                </MudCardContent>
+                <MudCardActions>
+                    <MudButton Variant="Variant.Text" Href="https://www.fef.ec/" Target="_blank" Color="Color.Primary">Ver más</MudButton>
+                </MudCardActions>
+            </MudCard>
+        </MudPaper>
+    </MudItem>
+</MudGrid>

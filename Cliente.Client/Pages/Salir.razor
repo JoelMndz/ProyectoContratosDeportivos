@@ -1,0 +1,11 @@
+﻿@page "/salir"
+
+<MudText Typo="Typo.subtitle1" Class="px-4">Saliendo</MudText>
+
+@code {
+	protected async override Task OnInitializedAsync()
+    {
+        await authStateProvider.Logout();
+        _navigationManager.NavigateTo("/");
+    }
+}

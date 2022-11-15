@@ -1,0 +1,50 @@
+﻿<MudTable
+	Items="appState.ContratosState.ListaContratos"
+	Hover="true" 
+	Loading="loading" 
+	LoadingProgressColor="Color.Info">
+    <ToolBarContent>
+        <MudText Typo="Typo.h6">Lista de contratos</MudText>
+        <MudSpacer />
+        @if (Rol == "Gerente")
+        {
+            <MudFab 
+                Icon="@Icons.Material.Filled.Add"
+                Color="Color.Success"
+                OnClick="Agregar"/>  
+        }
+       
+    </ToolBarContent>
+    <HeaderContent>
+        <MudTh>Precio</MudTh>
+        <MudTh>Fecha Inicio</MudTh>
+        <MudTh>Fecha Fin</MudTh>
+        <MudTh>Descripción</MudTh>
+        <MudTh>Número</MudTh>
+        <MudTh>Jugador</MudTh>
+        <MudTh>Equipo</MudTh>
+        @if (Rol == "Gerente")
+        {
+            <MudTh>Acción</MudTh>            
+        }
+    </HeaderContent>
+    <RowTemplate>
+        <MudTd DataLabel="Precio">@context.Precio</MudTd>
+        <MudTd DataLabel="Fecha Inicio">@FormatearFecha(@context.FechaInicio)</MudTd>
+        <MudTd DataLabel="Fecha Fin">@FormatearFecha(context.FechaFin)</MudTd>
+        <MudTd DataLabel="Descripción">@context.Descripcion</MudTd>
+        <MudTd DataLabel="Número">@context.NumeroJugador</MudTd>
+        <MudTd DataLabel="Jugador">@context.NombreJugador</MudTd>
+        <MudTd DataLabel="Equipo">@context.NombreEquipo</MudTd>
+        @if (Rol == "Gerente")
+        {
+            <MudTd>
+                <MudFab Icon="@Icons.Material.Filled.Edit" Color="Color.Warning" Size="Size.Small" OnClick="@(()=>Editar(context))" />
+                <MudFab Icon="@Icons.Material.Filled.Delete" Color="Color.Error" Size="Size.Small" OnClick="@(()=>Confirmar(context))" />
+            </MudTd>
+        }
+    </RowTemplate>
+    <PagerContent>
+        <MudTablePager PageSizeOptions="new int[]{5, 10}"/>
+    </PagerContent>
+</MudTable>

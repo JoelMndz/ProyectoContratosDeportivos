@@ -1,0 +1,53 @@
+﻿@implements IDisposable
+
+<MudTable
+	Items="appState.EquipoState.ListaEquipos"
+	Hover="true" 
+	Loading="loading" 
+	LoadingProgressColor="Color.Info">
+    <ToolBarContent>
+        <MudText Typo="Typo.h6">Lista de equipos</MudText>
+        <MudSpacer />
+        @if (Rol == "Gerente")
+        {
+            <MudFab 
+                Icon="@Icons.Material.Filled.Add"
+                Color="Color.Success"
+                OnClick="Agregar"/>            
+        }
+    </ToolBarContent>
+    <HeaderContent>
+        <MudTh>Nombres</MudTh>
+        <MudTh>Presupuesto Anual</MudTh>
+        <MudTh>Categoría</MudTh>
+        <MudTh>Gerente</MudTh>
+        @if (Rol == "Gerente")
+        {
+            <MudTh>Acción</MudTh>
+        }
+    </HeaderContent>
+    <RowTemplate>
+        <MudTd DataLabel="Nombres">@context.Nombre</MudTd>
+        <MudTd DataLabel="Presupuesto Anual">@context.PresupuestoAnual</MudTd>
+        <MudTd DataLabel="Categoría">@context.NombreCategoria</MudTd>
+        <MudTd DataLabel="Gerente">@context.NombreGerente</MudTd>
+        @if (Rol == "Gerente")
+        {
+            <MudTd>
+                <MudFab 
+                    Icon="@Icons.Material.Filled.Edit" 
+                    Color="Color.Warning" 
+                    OnClick="@(()=> Editar(context))"
+                    Size="Size.Small" />
+                <MudFab 
+                    Icon="@Icons.Material.Filled.Delete" 
+                    Color="Color.Error" 
+                    OnClick="@(()=> Confirmar(context))"
+                    Size="Size.Small" />
+            </MudTd>
+        }
+    </RowTemplate>
+    <PagerContent>
+        <MudTablePager PageSizeOptions="new int[]{5, 10}"/>
+    </PagerContent>
+</MudTable>

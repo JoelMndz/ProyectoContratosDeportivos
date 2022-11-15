@@ -1,0 +1,35 @@
+﻿@page "/contratos"
+@attribute [Authorize]
+
+<PageTitle>Equipos</PageTitle>
+
+<MudGrid Justify="Justify.SpaceBetween">
+    <AuthorizeView Roles="Gerente">
+        <Authorized>
+            <MudItem xs="12" Class="mt-5">
+                <MudPaper Class="pa-4 ma-4" Elevation="4">
+                    <TablaContratos Rol="Gerente" />
+                </MudPaper>
+            </MudItem>
+        </Authorized>
+    </AuthorizeView>
+    <AuthorizeView Roles="Representante">
+        <Authorized>
+            <MudItem xs="12" Class="mt-5">
+                <MudPaper Class="pa-4 ma-4" Elevation="4">
+                    <TablaContratos Rol="Representante"/>
+                </MudPaper>
+            </MudItem>
+        </Authorized>
+    </AuthorizeView>
+    <AuthorizeView Roles="Administrador">
+        <Authorized>
+            <MudItem xs="12" Class="mt-5">
+                <MudPaper Class="pa-4 ma-4" Elevation="4">
+                    <TablaContratos Rol="Administrador"/>
+                </MudPaper>
+            </MudItem>
+        </Authorized>
+    </AuthorizeView>
+
+</MudGrid>
